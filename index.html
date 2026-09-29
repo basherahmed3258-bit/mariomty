@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/icon.ico"/>
+<title>Mariomty ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#000;
+overflow-x:hidden;
+color:white;
+}
+
+/* خلفية متحركة */
+
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(-45deg,#ff0080,#7928ca,#00c6ff,#ff4d4d);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+z-index:-3;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* طبقة شفافة */
+
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+z-index:-2;
+}
+
+/* قلوب */
+
+.hearts{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
+pointer-events:none;
+}
+
+.heart{
+position:absolute;
+color:#ff4d6d;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-10vh) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* شاشة تحميل */
+
+.loader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+transition:1s;
+}
+
+.loader h1{
+font-size:40px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+/* تسجيل الدخول */
+
+.login{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.login-box{
+width:100%;
+max-width:420px;
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(15px);
+padding:40px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 0 40px rgba(255,255,255,.15);
+animation:fade 1.5s ease;
+}
+
+.login-box h1{
+font-size:45px;
+margin-bottom:20px;
+}
+
+.login-box p{
+margin-bottom:20px;
+font-size:18px;
+}
+
+input{
+width:100%;
+padding:16px;
+border:none;
+outline:none;
+border-radius:15px;
+margin-bottom:15px;
+font-size:18px;
+}
+
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:15px;
+background:white;
+color:#ff0080;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+#error{
+margin-top:15px;
+color:#ffb3b3;
+}
+
+/* الموقع */
+
+.main{
+display:none;
+animation:fade 2s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* الهيدر */
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:70px;
+font-weight:900;
+margin-bottom:20px;
+animation:upDown 2s infinite alternate;
+}
+
+.hero p{
+font-size:24px;
+max-width:800px;
+line-height:2;
+}
+
+@keyframes upDown{
+from{transform:translateY(0);}
+to{transform:translateY(-10px);}
+}
+
+/* العداد */
+
+.counter{
+margin-top:30px;
+font-size:30px;
+font-weight:bold;
+background:rgba(255,255,255,.1);
+padding:15px 30px;
+border-radius:20px;
+}
+
+/* الأقسام */
+
+.section{
+padding:80px 20px;
+}
+
+.title{
+text-align:center;
+font-size:50px;
+margin-bottom:50px;
+}
+
+/* الصور */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.gallery img{
+width:100%;
+height:320px;
+object-fit:cover;
+border-radius:25px;
+transition:.4s;
+box-shadow:0 0 20px rgba(255,255,255,.2);
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* الرسائل */
+
+.message{
+max-width:900px;
+margin:25px auto;
+background:rgba(255,255,255,.08);
+padding:30px;
+border-radius:25px;
+line-height:2;
+font-size:22px;
+backdrop-filter:blur(12px);
+transition:.4s;
+}
+
+.message:hover{
+transform:scale(1.02);
+}
+
+/* الفيديو */
+
+video{
+width:100%;
+border-radius:25px;
+}
+
+/* النهاية */
+
+.footer{
+padding:60px 20px;
+text-align:center;
+font-size:22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<!-- القلوب -->
+
+<div class="hearts" id="hearts"></div>
+
+<!-- شاشة التحميل -->
+
+<div class="loader" id="loader">
+<h1>Loading Mariam ❤️</h1>
+</div>
+
+<!-- تسجيل الدخول -->
+
+<section class="login" id="loginPage">
+
+<div class="login-box">
+
+<h1>Mariam ❤️</h1>
+
+<p>اكتب الباسورد للدخول ✨</p>
+
+<input type="password" id="password" placeholder="الباسورد">
+
+<button onclick="login()">دخول</button>
+
+<p id="error"></p>
+
+</div>
+
+</section>
+
+<!-- الموقع -->
+
+<div class="main" id="mainPage">
+
+<section class="hero">
+
+<h1>مريومتي ❤️</h1>
+
+<p>
+كل لحظة معاكي ليها معنى مختلف… وكل ذكرى بينا محفورة جوا قلبي ✨
+</p>
+
+<div class="counter" id="daysCounter">
+ذكرياتنا ❤️
+</div>
+
+</section>
+
+<!-- الرسائل -->
+
+<section class="section">
+
+<h2 class="title">رسائل ليكي ❤️</h2>
+
+<div class="message">
+ مريومتي.. انتي من أجمل الحاجات اللي حصلتلي ❤️
+</div>
+
+<div class="message">
+وجودك بيخليني أبتسم حتى في أصعب الأيام ✨
+</div>
+
+<div class="message">
+كل لحظة معاكي مختلفة ومميزة جدًا 💫
+</div>
+
+<div class="message">
+ضحكتك لوحدها كفاية تغيّر مود يوم كامل 🌙
+</div>
+
+<div class="message">
+يمكن الكلام قليل… لكن مكانك كبير جدًا جوا قلبي ❤️
+</div>
+
+<div class="message">
+كل صورة وكل فيديو هنا معمول مخصوص عشان يفضلوا ذكرى بينا 📸
+</div>
+
+</section>
+
+<!-- الصور -->
+
+<section class="section">
+
+<h2 class="title">صورنا 📸</h2>
+
+<div class="gallery">
+
+<img src="img/1.jpg">
+<img src="img/9.jpg">
+<img src="img/3.jpg">
+<img src="img/4.jpg">
+<img src="img/8.jpg">
+<img src="img/14.jpg">
+
+</div>
+
+</section>
+
+<!-- الفيديو -->
+
+<section class="section">
+
+<h2 class="title">فيديو ليكي 🎥</h2>
+
+<video controls autoplay muted loop>
+<source src="img/10.mp4" type="video/mp4">
+</video>
+
+</section>
+
+<!-- اقتباسات -->
+
+<section class="section">
+
+<h2 class="title">كلام يشبهك ✨</h2>
+
+<div class="message">
+"بعض الأشخاص يدخلون حياتنا ويغيرونها بالكامل ❤️"
+</div>
+
+<div class="message">
+"وجودك راحة… وكأن الدنيا أهدى معاكي 🌙"
+</div>
+
+<div class="message">
+"أجمل شعور إن يكون في حد بيفهمك من غير كلام 💫"
+</div>
+
+</section>
+
+
+<!-- قصة حب -->
+
+<section class="section">
+
+<h2 class="title">حكايتنا ❤️</h2>
+
+<div class="message">
+من أول يوم عرفتك فيه وأنا حسيت إنك مختلفة عن أي حد ✨
+</div>
+
+<div class="message">
+مكنتش متوقع إن وجود شخص واحد يقدر يغير يوم كامل بالطريقة دي ❤️
+</div>
+
+<div class="message">
+كل مرة بنتكلم فيها بحس براحة غريبة وكأن الدنيا أهدى 💫
+</div>
+
+<div class="message">
+وجودك في حياتي خلّى لكل حاجة طعم مختلف 🌙
+</div>
+
+<div class="message">
+كل ضحكة بينا كانت كفاية تنسيني أي زعل ❤️
+</div>
+
+<div class="message">
+وأجمل حاجة إن كل يوم بيعدي بحس إنك أقرب لقلبي أكتر ✨
+</div>
+
+</section>
+
+<!-- جاليري إضافي -->
+
+<section class="section">
+
+<h2 class="title">ذكرياتنا 📸</h2>
+
+<div class="gallery">
+
+<img src="img/15.jpg">
+<img src="img/16.jpg">
+<img src="img/17.jpg">
+<img src="img/18.jpg">
+<img src="img/19.jpg">
+<img src="img/20.jpg">
+<img src="img/20.jpg">
+<img src="img/21.jpg">
+
+</div>
+
+</section>
+
+<!-- فيديوهات زيادة -->
+
+<section class="section">
+
+<h2 class="title">فيديوهاتنا 🎥</h2>
+
+<div class="videos">
+
+<video controls autoplay muted loop>
+<source src="img/10.mp4" type="video/mp4">
+</video>
+
+<video controls>
+<source src="img/11.mp4" type="video/mp4">
+</video>
+
+<video controls>
+<source src="img/12.mp4" type="video/mp4">
+</video>
+
+<video controls>
+<source src="img/Download.mp4" type="video/mp4">
+</video>
+
+</div>
+
+</section>
+
+<!-- تايم لاين -->
+
+<section class="section">
+
+<h2 class="title">رحلتنا ⏳</h2>
+
+<div class="message">
+📍 أول مرة اتكلمنا فيها ❤️
+</div>
+
+<div class="message">
+📍 أول ضحكة طويلة بينا ✨
+</div>
+
+<div class="message">
+📍 أول صورة احتفظت بيها ليكي 📸
+</div>
+
+<div class="message">
+📍 أول مرة حسيت إنك بقيتي مهمة جدًا بالنسبالي 💫
+</div>
+
+<div class="message">
+📍 وكل يوم جديد معاكي بيبقى ذكرى أحلى 🌙
+</div>
+
+</section>
+
+<!-- رسائل طويلة -->
+
+<section class="section">
+
+<h2 class="title">رسائل من قلبي ❤️</h2>
+
+<div class="message">
+يا مريم…  
+يمكن مش بعرف أوصف كل اللي جوايا بالكلام، لكن وجودك بيفرق معايا بطريقة كبيرة جدًا ✨  
+كل مرة بشوفك أو حتى بتكلمي فيها بحس براحة غريبة وكأن كل حاجة بقت أخف ❤️
+</div>
+
+<div class="message">
+بحب تفاصيلك الصغيرة…  
+طريقتك في الكلام، ضحكتك، اهتمامك، وحتى سكوتك 🌙  
+كل حاجة فيكي ليها إحساس مختلف بالنسبالي 💫
+</div>
+
+<div class="message">
+أوقات كتير كنت بكون مخنوق أو تعبان…  
+ومجرد كلام بسيط منك كان كفاية يخليني أحسن ❤️
+</div>
+
+<div class="message">
+مهما الأيام تتغير أو الوقت يعدي…  
+هتفضلي واحدة من أجمل الحاجات اللي حصلتلي ✨
+</div>
+
+</section>
+
+<!-- اقتباسات -->
+
+<section class="section">
+
+<h2 class="title">كلام يشبهنا 💕</h2>
+
+<div class="message">
+"في ناس وجودها راحة… وانتي أجمل راحة ❤️"
+</div>
+
+<div class="message">
+"بعض الأشخاص يدخلون حياتنا فيجعلون كل شيء أجمل ✨"
+</div>
+
+<div class="message">
+"الحب الحقيقي هو أن تجد شخصًا يشبه الأمان 🌙"
+</div>
+
+<div class="message">
+"أجمل صدفة كانت معرفتي بيكي 💫"
+</div>
+
+</section>
+
+<!-- قسم النهاية -->
+
+<section class="section">
+
+<h2 class="title">لآخر العمر ❤️</h2>
+
+<div class="message">
+كل الصور والفيديوهات والكلام هنا معمولين مخصوص عشان يفضلوا شاهدين على أحلى ذكريات بينا ✨
+</div>
+
+<div class="message">
+وشكرًا إنك موجودة في حياتي بالشكل الجميل ده 🌙
+</div>
+
+<div class="message">
+Made With Love For Mariam ❤️
+</div>
+
+</section>
+
+<!-- اغنية -->
+
+<section class="section" style="text-align:center;">
+
+<h2 class="title">أغنيتنا 🎵</h2>
+
+<audio controls autoplay loop>
+<source src="img/02-Ana_Mosamem.mp3" type="audio/mpeg">
+</audio>
+
+</section>
+
+<!-- النهاية -->
+
+<section class="section">
+
+<h2 class="title">رسالة أخيرة ❤️</h2>
+
+<div class="message">
+شكرًا على كل لحظة حلوة بينا ✨
+</div>
+
+<div class="message">
+وشكرًا إنك موجودة في حياتي ❤️
+</div>
+
+<div class="message">
+Made With Love For Mariam ❤️
+</div>
+
+</section>
+
+<div class="footer">
+Forever ❤️
+</div>
+
+</div>
+
+<script>
+
+/* شاشة التحميل */
+
+window.onload = ()=>{
+
+setTimeout(()=>{
+
+document.getElementById("loader").style.opacity="0";
+
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},1000);
+
+},2500);
+
+}
+
+/* الباسورد */
+
+let correctPassword = "بطتي";
+
+function login(){
+
+let pass=document.getElementById("password").value;
+
+if(pass===correctPassword){
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("mainPage").style.display="block";
+
+}else{
+
+document.getElementById("error").innerHTML="الباسورد غلط ❌";
+
+}
+
+}
+
+/* القلوب */
+
+for(let i=0;i<50;i++){
+
+let heart=document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="❤";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.animationDuration=(Math.random()*5+5)+"s";
+
+heart.style.fontSize=(Math.random()*20+15)+"px";
+
+document.getElementById("hearts").appendChild(heart);
+
+}
+
+/* عداد الأيام */
+
+let startDate = new Date("2023-10-17");
+
+let now = new Date();
+
+let diff = now - startDate;
+
+let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+document.getElementById("daysCounter").innerHTML =
+"مع بعض بقالنا ❤️ " + days + " يوم";
+
+</script>
+
+</body>
+</html>
